@@ -7,7 +7,7 @@ package com.example.android.quakereport;
 public class Earthquake {
 
     private float mMagnitude;
-    private int mDate;
+    private long mDate;
     private String mPlace;
 
     /**
@@ -16,7 +16,7 @@ public class Earthquake {
      * @param date - When earthquake occurred
      * @param place - Where earthquake occurred
      */
-    public Earthquake (float mag, int date, String place) {
+    public Earthquake (float mag, long date, String place) {
         mMagnitude = mag;
         mDate = date;
         mPlace = place;
@@ -26,7 +26,7 @@ public class Earthquake {
         return mMagnitude;
     }
 
-    public int getDate() {
+    public long getDate() {
         return mDate;
     }
 
