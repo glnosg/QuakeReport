@@ -16,10 +16,10 @@ public class Earthquake {
      * @param date - When earthquake occurred
      * @param place - Where earthquake occurred
      */
-    public Earthquake (float mag, long date, String place) {
-        mMagnitude = mag;
-        mDate = date;
+    public Earthquake (String mag, String place, String date) {
+        mMagnitude = Float.parseFloat(mag);
         mPlace = place;
+        mDate = Long.parseLong(date);
     }
 
     public float getMagnitude() {

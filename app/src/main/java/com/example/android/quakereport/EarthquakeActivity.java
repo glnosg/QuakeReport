@@ -30,15 +30,17 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        // Create a fake list of earthquake locations.
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
-        earthquakes.add(new Earthquake(7.2f, 1508652313190L, "San Francisco"));
-        earthquakes.add(new Earthquake(6.1f, 1508645458410L, "London"));
-        earthquakes.add(new Earthquake(3.9f, 1508636229290L, "Tokyo"));
-        earthquakes.add(new Earthquake(5.4f, 1508617526470L, "Mexico City"));
-        earthquakes.add(new Earthquake(2.8f, 1508611114130L, "Moscow"));
-        earthquakes.add(new Earthquake(4.9f, 1508605141030L, "Rio"));
-        earthquakes.add(new Earthquake(1.6f, 1508603737820L, "Paris"));
+        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
+
+//        // Create a fake list of earthquake locations.
+//        ArrayList<Earthquake> earthquakes = new ArrayList<>();
+//        earthquakes.add(new Earthquake(7.2f, 1508652313190L, "San Francisco"));
+//        earthquakes.add(new Earthquake(6.1f, 1508645458410L, "London"));
+//        earthquakes.add(new Earthquake(3.9f, 1508636229290L, "Tokyo"));
+//        earthquakes.add(new Earthquake(5.4f, 1508617526470L, "Mexico City"));
+//        earthquakes.add(new Earthquake(2.8f, 1508611114130L, "Moscow"));
+//        earthquakes.add(new Earthquake(4.9f, 1508605141030L, "Rio"));
+//        earthquakes.add(new Earthquake(1.6f, 1508603737820L, "Paris"));
 
         // Create a new {@link ArrayAdapter} of earthquakes
         EarthquakeAdapter earthquakeAdapter = new EarthquakeAdapter(this, earthquakes);
