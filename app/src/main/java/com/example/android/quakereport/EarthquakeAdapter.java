@@ -1,17 +1,12 @@
 package com.example.android.quakereport;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -24,6 +19,8 @@ import java.util.Date;
  */
 
 public class EarthquakeAdapter extends ArrayAdapter {
+
+    private static final String LOCATION_SEPARATOR = " of ";
 
     /**
      * @param context - Current context
@@ -53,13 +50,36 @@ public class EarthquakeAdapter extends ArrayAdapter {
         TextView magnitudeTextView = (TextView) myView.findViewById(R.id.magnitude_text_view);
         magnitudeTextView.setText(Float.toString(currentEarthquake.getMagnitude()));
 
-        TextView placeTextView = (TextView) myView.findViewById(R.id.place_text_view);
-        placeTextView.setText(currentEarthquake.getPlace());
+        String[] locationData = prepareLocationStrings(currentEarthquake.getPlace());
+
+        TextView locationPrimaryTextView = (TextView) myView.findViewById(R.id.location_primary_text_view);
+        locationPrimaryTextView.setText(locationData[0]);
+
+        TextView locationOffsetTextView = (TextView) myView.findViewById(R.id.location_offset_text_view);
+        locationOffsetTextView.setText(locationData[1]);
 
         TextView dateTextView = (TextView) myView.findViewById(R.id.date_text_view);
         DateFormat df = new SimpleDateFormat("MMM d, yyyy");
-        dateTextView.setText(df.format(new Date(currentEarthquake.getDate())));
+        dateTextView.setText(df.format(new Date(currentEarthquake.getTimeInMilliseconds())));
+
+        TextView timeTextView = (TextView) myView.findViewById(R.id.time_text_view);
+        DateFormat tdf = new SimpleDateFormat("h:mm a");
+        timeTextView.setText(tdf.format(new Date(currentEarthquake.getTimeInMilliseconds())));
 
         return myView;
+    }
+
+    String[] prepareLocationStrings(String location) {
+        String[] locationStrings = new String[2];
+
+        if (location.contains(LOCATION_SEPARATOR)) {
+            locationStrings = location.split(LOCATION_SEPARATOR);
+            locationStrings[0] += " of";
+        } else {
+            locationStrings[0] = getContext().getString(R.string.near_the);
+            locationStrings[1] = location;
+        }
+
+        return locationStrings;
     }
 }

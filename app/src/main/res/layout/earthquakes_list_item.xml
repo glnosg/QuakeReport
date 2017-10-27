@@ -13,16 +13,38 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/location_primary_text_view"
+            tools:text="Near the"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/location_offset_text_view"
+            tools:text="Pacific Ocean"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/place_text_view"
-        tools:text="San Francisco"
+        android:id="@+id/date_text_view"
+        tools:text="Oct 22, 2017"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/date_text_view"
-        tools:text="Oct 22, 2017"
+        android:id="@+id/time_text_view"
+        tools:text="3:00 PM"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
