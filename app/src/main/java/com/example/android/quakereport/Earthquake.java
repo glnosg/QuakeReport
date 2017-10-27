@@ -6,7 +6,7 @@ package com.example.android.quakereport;
 
 public class Earthquake {
 
-    private float mMagnitude;
+    private double mMagnitude;
     private long mTime;
     private String mPlace;
 
@@ -16,13 +16,13 @@ public class Earthquake {
      * @param time - When earthquake occurred
      * @param place - Where earthquake occurred
      */
-    public Earthquake (String mag, String place, long time) {
-        mMagnitude = Float.parseFloat(mag);
+    public Earthquake (double mag, String place, long time) {
+        mMagnitude = mag;
         mPlace = place;
         mTime = time;
     }
 
-    public float getMagnitude() {
+    public double getMagnitude() {
         return mMagnitude;
     }
 

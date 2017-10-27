@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +49,8 @@ public class EarthquakeAdapter extends ArrayAdapter {
         final Earthquake currentEarthquake = (Earthquake) getItem(position);
 
         TextView magnitudeTextView = (TextView) myView.findViewById(R.id.magnitude_text_view);
-        magnitudeTextView.setText(Float.toString(currentEarthquake.getMagnitude()));
+        DecimalFormat decimalFormatter = new DecimalFormat(getContext().getString(R.string.decimal_format));
+        magnitudeTextView.setText(decimalFormatter.format(currentEarthquake.getMagnitude()));
 
         String[] locationData = prepareLocationStrings(currentEarthquake.getPlace());
 
@@ -59,8 +61,8 @@ public class EarthquakeAdapter extends ArrayAdapter {
         locationOffsetTextView.setText(locationData[1]);
 
         TextView dateTextView = (TextView) myView.findViewById(R.id.date_text_view);
-        DateFormat df = new SimpleDateFormat("MMM d, yyyy");
-        dateTextView.setText(df.format(new Date(currentEarthquake.getTimeInMilliseconds())));
+        DateFormat dateFormatter = new SimpleDateFormat("MMM d, yyyy");
+        dateTextView.setText(dateFormatter.format(new Date(currentEarthquake.getTimeInMilliseconds())));
 
         TextView timeTextView = (TextView) myView.findViewById(R.id.time_text_view);
         DateFormat tdf = new SimpleDateFormat("h:mm a");
