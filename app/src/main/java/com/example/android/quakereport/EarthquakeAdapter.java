@@ -59,10 +59,10 @@ public class EarthquakeAdapter extends ArrayAdapter {
 
         String[] locationData = prepareLocationStrings(currentEarthquake.getPlace());
 
-        TextView locationPrimaryTextView = (TextView) myView.findViewById(R.id.location_primary_text_view);
+        TextView locationPrimaryTextView = (TextView) myView.findViewById(R.id.location_offset_text_view);
         locationPrimaryTextView.setText(locationData[0]);
 
-        TextView locationOffsetTextView = (TextView) myView.findViewById(R.id.location_offset_text_view);
+        TextView locationOffsetTextView = (TextView) myView.findViewById(R.id.location_primary_text_view);
         locationOffsetTextView.setText(locationData[1]);
 
         TextView dateTextView = (TextView) myView.findViewById(R.id.date_text_view);
