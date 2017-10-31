@@ -16,15 +16,17 @@
 package com.example.android.quakereport;
 
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class EarthquakeActivity extends AppCompatActivity
 
         TextView emptyView = (TextView) findViewById(R.id.empty_view);
         emptyView.setText("No earthquakes found");
-        ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        View loadingSpinner = findViewById(R.id.loading_spinner);
         loadingSpinner.setVisibility(View.GONE);
 
         if (earthquakes != null && !earthquakes.isEmpty()) {
@@ -74,9 +76,22 @@ public class EarthquakeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        } else {
+
+            View loadingSpinner = findViewById(R.id.loading_spinner);
+            loadingSpinner.setVisibility(View.GONE);
+            TextView emptyView = (TextView) findViewById(R.id.empty_view);
+            emptyView.setText("No internet connection");
+        }
     }
 
     private void updateUI(List<Earthquake> e) {
