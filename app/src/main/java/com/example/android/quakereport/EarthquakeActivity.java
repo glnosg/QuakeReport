@@ -24,16 +24,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<Earthquake>>{
+        implements LoaderManager.LoaderCallbacks<List<Earthquake>> {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=2&limit=50";
     private static final int EARTHQUAKE_LOADER_ID = 1;
     private EarthquakeAdapter mEarthquakeAdapter;
 
@@ -48,6 +50,11 @@ public class EarthquakeActivity extends AppCompatActivity
         if (mEarthquakeAdapter != null) {
             mEarthquakeAdapter.clear();
         }
+
+        TextView emptyView = (TextView) findViewById(R.id.empty_view);
+        emptyView.setText("No earthquakes found");
+        ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        loadingSpinner.setVisibility(View.GONE);
 
         if (earthquakes != null && !earthquakes.isEmpty()) {
                 updateUI(earthquakes);
@@ -81,6 +88,7 @@ public class EarthquakeActivity extends AppCompatActivity
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        earthquakeListView.setEmptyView(findViewById(R.id.empty_view));
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
